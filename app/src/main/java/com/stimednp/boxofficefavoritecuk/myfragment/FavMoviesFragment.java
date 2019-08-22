@@ -71,18 +71,11 @@ public class FavMoviesFragment extends Fragment implements LoadFavMoviesCallback
         recyclervFavMovies.setHasFixedSize(true);
         favMoviesAdapter = new FavMoviesAdapter(this.getActivity());
         recyclervFavMovies.setAdapter(favMoviesAdapter);
-        HandlerThread handlerThread = new HandlerThread("DataObserver");
-        handlerThread.start();
-        Handler handler = new Handler(handlerThread.getLooper());
-        myObserver = new DataObserver(handler, getContext());
 
-        if (getContext() != null) {
-            getContext().getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
-        }
+        checkingMovieList();
 
         //method
         evetListener();
-//        checkingMovieList();
 
         if (savedInstanceState == null) {
             new LoadMoviesAsync(getContext(), this).execute();
@@ -105,20 +98,28 @@ public class FavMoviesFragment extends Fragment implements LoadFavMoviesCallback
     }
 
     private void checkingMovieList(){
-        if (list.size() > 0) {
-            favMoviesAdapter.setListMoviesm(list);
-        } else {
-            favMoviesAdapter.setListMoviesm(list);
-        }
-        refreshLayoutMovie.setRefreshing(false);
-
-        Toast.makeText(getContext(), "LENGTH : "+favMoviesAdapter.getItemCount(), Toast.LENGTH_SHORT).show();
+        HandlerThread handlerThread = new HandlerThread("DataObserver");
+        handlerThread.start();
+        Handler handler = new Handler(handlerThread.getLooper());
+        myObserver = new DataObserver(handler, getContext());
+        new LoadMoviesAsync(getContext(), this).execute();
     }
 
     @Override
     public void postExecute(Cursor cursor) {
         list = mapCursorToArrayList(cursor);
-        checkingMovieList();
+        if (getContext() != null) {
+            getContext().getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
+        }
+        if (list.size() > 0) {
+            textViewEmpty.setVisibility(View.GONE);
+            favMoviesAdapter.setListMoviesm(list);
+        } else {
+            textViewEmpty.setVisibility(View.VISIBLE);
+            favMoviesAdapter.setListMoviesm(list);
+        }
+        recyclervFavMovies.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fade_transition_animation));
+        refreshLayoutMovie.setRefreshing(false);
     }
 
     private static class LoadMoviesAsync extends AsyncTask<Void, Void, Cursor> {
@@ -174,11 +175,12 @@ public class FavMoviesFragment extends Fragment implements LoadFavMoviesCallback
             @Override
             public void onItemClicked(MoviesModel moviesModel) {
                 Intent intent = new Intent(getActivity(), DetailsMovieActivity.class);
-                Uri uri = Uri.parse(CONTENT_URI + "/" + moviesModel.getId());
-                intent.setData(uri);
-                intent.putExtra(DetailsMovieActivity.EXTRA_WHERE_FROM, TAG);
+//                Uri uri = Uri.parse(CONTENT_URI + "/" + moviesModel.getId());
+//                intent.setData(uri);
+//                intent.putExtra(DetailsMovieActivity.EXTRA_WHERE_FROM, TAG);
                 intent.putExtra(DetailsMovieActivity.EXTRA_MOVIE, moviesModel);
-                startActivityForResult(intent, DetailsMovieActivity.REQUEST_ADD);
+                startActivity(intent);
+//                startActivityForResult(intent, DetailsMovieActivity.REQUEST_ADD);
             }
         });
         refreshLayoutMovie.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -198,21 +200,21 @@ public class FavMoviesFragment extends Fragment implements LoadFavMoviesCallback
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            if (requestCode == DetailsMovieActivity.REQUEST_ADD) {
-                if (resultCode == DetailsMovieActivity.RESULT_DELETE) {
-                    favMoviesAdapter.removeItem(0);
-                    recyclervFavMovies.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fade_transition_animation));
-                    if (favMoviesAdapter.getItemCount() == 0) {
-                        textViewEmpty.setVisibility(View.VISIBLE);
-                    }
-                }
-                new LoadMoviesAsync(getContext(), this).execute();
-            }
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (data != null) {
+//            if (requestCode == DetailsMovieActivity.REQUEST_ADD) {
+//                if (resultCode == DetailsMovieActivity.RESULT_DELETE) {
+//                    favMoviesAdapter.removeItem(0);
+//                    recyclervFavMovies.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fade_transition_animation));
+//                    if (favMoviesAdapter.getItemCount() == 0) {
+//                        textViewEmpty.setVisibility(View.VISIBLE);
+//                    }
+//                }
+//                new LoadMoviesAsync(getContext(), this).execute();
+//            }
+//        }
+//    }
 
 }
