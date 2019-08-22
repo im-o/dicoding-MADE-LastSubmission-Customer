@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,9 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,13 +33,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.stimednp.boxofficefavoritecuk.mydb.DatabaseContract.MovieColumns.CONTENT_URI;
-import static com.stimednp.boxofficefavoritecuk.myhelper.MappingHelper.mapCursorToArrayList;
+import static com.stimednp.boxofficefavoritecuk.mymapcursor.MappingHelper.mapCursorToArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavMoviesFragment extends Fragment implements LoadFavMoviesCallback {
-    public static final String TAG = FavMoviesFragment.class.getSimpleName();
     private FavMoviesAdapter favMoviesAdapter;
     private FavMoviesFragment.DataObserver myObserver;
     private RecyclerView recyclervFavMovies;
@@ -97,7 +93,7 @@ public class FavMoviesFragment extends Fragment implements LoadFavMoviesCallback
         });
     }
 
-    private void checkingMovieList(){
+    private void checkingMovieList() {
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
@@ -175,12 +171,8 @@ public class FavMoviesFragment extends Fragment implements LoadFavMoviesCallback
             @Override
             public void onItemClicked(MoviesModel moviesModel) {
                 Intent intent = new Intent(getActivity(), DetailsMovieActivity.class);
-//                Uri uri = Uri.parse(CONTENT_URI + "/" + moviesModel.getId());
-//                intent.setData(uri);
-//                intent.putExtra(DetailsMovieActivity.EXTRA_WHERE_FROM, TAG);
                 intent.putExtra(DetailsMovieActivity.EXTRA_MOVIE, moviesModel);
                 startActivity(intent);
-//                startActivityForResult(intent, DetailsMovieActivity.REQUEST_ADD);
             }
         });
         refreshLayoutMovie.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -198,23 +190,4 @@ public class FavMoviesFragment extends Fragment implements LoadFavMoviesCallback
             }
         });
     }
-
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (data != null) {
-//            if (requestCode == DetailsMovieActivity.REQUEST_ADD) {
-//                if (resultCode == DetailsMovieActivity.RESULT_DELETE) {
-//                    favMoviesAdapter.removeItem(0);
-//                    recyclervFavMovies.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fade_transition_animation));
-//                    if (favMoviesAdapter.getItemCount() == 0) {
-//                        textViewEmpty.setVisibility(View.VISIBLE);
-//                    }
-//                }
-//                new LoadMoviesAsync(getContext(), this).execute();
-//            }
-//        }
-//    }
-
 }

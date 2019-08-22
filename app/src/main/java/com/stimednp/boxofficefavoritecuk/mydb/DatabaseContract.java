@@ -9,12 +9,12 @@ import android.provider.BaseColumns;
  */
 
 public final class DatabaseContract {
-    public static final String AUTHORITY = "com.stimednp.aplikasimoviecataloguesub4";
-    public static final String SCHEME = "content";
+    private static final String AUTHORITY = "com.stimednp.aplikasimoviecataloguesub4";
+    private static final String SCHEME = "content";
 
     public static final class MovieColumns implements BaseColumns {
+        static final String TABLE_NAME = "tbl_moviesm";
         public static final String ID = "id";
-        public static final String TABLE_NAME = "tbl_moviesm";
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_RELEASE_DATE = "release_date";
         public static final String COLUMN_VOTE_AVERAGE = "vote_average";
@@ -28,16 +28,16 @@ public final class DatabaseContract {
                 .appendPath(TABLE_NAME)
                 .build();
     }
-    public static String getColumnString(Cursor cursor, String columnName){
+
+    public static String getColumnString(Cursor cursor, String columnName) {
         return cursor.getString(cursor.getColumnIndex(columnName));
     }
-    public static int getColumnInt(Cursor cursor, String columnName){
+
+    public static int getColumnInt(Cursor cursor, String columnName) {
         return cursor.getInt(cursor.getColumnIndex(columnName));
     }
-    public static long getColumnLong(Cursor cursor, String columnName){
-        return cursor.getLong(cursor.getColumnIndex(columnName));
-    }
-    public static double getColumnDouble(Cursor cursor, String columnName){
+
+    public static double getColumnDouble(Cursor cursor, String columnName) {
         return cursor.getDouble(cursor.getColumnIndex(columnName));
     }
 }

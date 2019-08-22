@@ -1,20 +1,16 @@
 <resources>
     <string name="package_main_app">com.stimednp.aplikasimoviecataloguesub4</string>
-    <string name="app_name">BoxOffice Favorite Cuk</string>
+    <string name="app_name">CUSTOMER BoxOFFICE</string>
     <string name="desc_img">Images</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
     <string name="movies_empty">Your favorite list movies is empty…</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="str_detail">Details</string>
     <string name="str_overview">OVERVIEW</string>
-    <string name="str_msg_add_fav">added to my favorite list…</string>
-    <string name="str_msg_delete_fav">remove from my favorite list…</string>
     <string name="name_tab1_movies">Favorite Movies</string>
     <string name="tap_to_close">Tap 2x for exit</string>
     <string name="delete">Delete</string>
-    <string name="str_msg">will be remove from movies favorite</string>
     <string name="str_title_move">Open Apps</string>
     <string name="str_msg_move">Want to open BoxOFFICE LASTSUB ?</string>
     <string name="str_msg_notf">Application BoxOFFICE LASTSUB not found (404) :)</string>

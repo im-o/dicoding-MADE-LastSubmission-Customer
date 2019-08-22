@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             setDefaultFragment();
         }
-        
-        //
+
+        //call metohd
         setActionBarToolbar(strMovies);
     }
 
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.item_delete_favorite){
+        if (item.getItemId() == R.id.item_delete_favorite) {
             Intent intent = getPackageManager().getLaunchIntentForPackage(getResources().getString(R.string.package_main_app));
             if (intent != null) {
                 showDialogMove(intent);

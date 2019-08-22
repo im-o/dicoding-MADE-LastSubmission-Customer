@@ -1,4 +1,4 @@
-package com.stimednp.boxofficefavoritecuk.myhelper;
+package com.stimednp.boxofficefavoritecuk.mymapcursor;
 
 import android.database.Cursor;
 

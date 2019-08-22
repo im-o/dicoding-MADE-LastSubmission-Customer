@@ -1,7 +1,6 @@
 package com.stimednp.boxofficefavoritecuk.mydbadapter;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
  */
 
 public class FavMoviesAdapter extends RecyclerView.Adapter<FavMoviesAdapter.MoviesmViewHolder> {
-    public static final String TAG = FavMoviesAdapter.class.getSimpleName();
+    private static final String TAG = FavMoviesAdapter.class.getSimpleName();
     private Activity mActivity;
     private ArrayList<MoviesModel> moviesModelList = new ArrayList<>();
 
@@ -32,31 +31,10 @@ public class FavMoviesAdapter extends RecyclerView.Adapter<FavMoviesAdapter.Movi
         this.mActivity = mActivity;
     }
 
-//    public ArrayList<MoviesModel> getmoviesmList() {
-//        return moviesModelList;
-//    }
-
     public void setListMoviesm(ArrayList<MoviesModel> listMoviesModel) {
-//        if (listMoviesModel.size() > 0) {
-//            this.moviesModelList.clear();
-//        }
-//        this.moviesModelList.addAll(listMoviesModel);
-//        notifyDataSetChanged();
-
         this.moviesModelList.clear();
         this.moviesModelList.addAll(listMoviesModel);
         notifyDataSetChanged();
-    }
-
-//    public void addItem(MoviesModel moviesModel) {
-//        this.moviesModelList.add(moviesModel);
-//        notifyItemInserted(moviesModelList.size() - 1);
-//    }
-//
-    public void removeItem(int position) {
-        this.moviesModelList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, moviesModelList.size());
     }
 
     //click custome
@@ -90,11 +68,11 @@ public class FavMoviesAdapter extends RecyclerView.Adapter<FavMoviesAdapter.Movi
 
     @Override
     public int getItemCount() {
-//        if (moviesModelList == null) {
-//            return 0;
-//        } else {
-        return moviesModelList.size();
-//        }
+        if (moviesModelList == null) {
+            return 0;
+        } else {
+            return moviesModelList.size();
+        }
     }
 
     class MoviesmViewHolder extends RecyclerView.ViewHolder {
@@ -124,17 +102,17 @@ public class FavMoviesAdapter extends RecyclerView.Adapter<FavMoviesAdapter.Movi
             String overView = movieItems.getOverview();
             String imgUrl = movieItems.getPoster_path();
 
-            Log.d(TAG, "bind XXXX : "+title);
-
             AllOtherMethod allOtherMethod = new AllOtherMethod();
             String myDate = allOtherMethod.changeFormatDate(release);
             tvTitle.setText(title);
             tvRating.setText(voteValue);
             tvDesc.setText(overView);
             tvRelease.setText(myDate);
-            Glide.with(mActivity)
-                    .load(pathImg + imgUrl)
-                    .into(imgvPoster);
+            if (imgUrl != null) {
+                Glide.with(mActivity)
+                        .load(pathImg + imgUrl)
+                        .into(imgvPoster);
+            }
         }
     }
 }
